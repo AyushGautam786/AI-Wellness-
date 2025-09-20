@@ -1,0 +1,242 @@
+{
+  "project_name": "h2s-project",
+  "description": "Emotion-Aware Story Generation System",
+  "version": "1.0.0",
+  "overview": "This project combines advanced emotion detection using BERT/DistilBERT machine learning models with therapeutic story generation to provide personalized, emotionally-responsive content for mental wellness.",
+  
+  "architecture": {
+    "backend": "Python FastAPI server with ML emotion detection model",
+    "frontend": "React/TypeScript application with emotion-aware chat interface", 
+    "dataset": "Comprehensive therapeutic story database (36 stories across 6 emotions)",
+    "integration": "Real-time emotion analysis with contextual story recommendations"
+  },
+
+  "emotions_supported": [
+    "Joy", "Sadness", "Love", "Anger", "Fear", "Surprise"
+  ],
+
+  "installation_requirements": {
+    "backend": {
+      "python_version": "3.8+",
+      "key_dependencies": [
+        "torch>=1.9.0",
+        "transformers>=4.21.0", 
+        "fastapi>=0.68.0",
+        "uvicorn>=0.15.0",
+        "numpy>=1.21.0",
+        "scikit-learn>=1.0.0"
+      ]
+    },
+    "frontend": {
+      "node_version": "16+",
+      "package_manager": "npm or yarn",
+      "key_dependencies": [
+        "react>=18.0.0",
+        "typescript>=4.7.0",
+        "vite>=3.0.0",
+        "tailwindcss>=3.0.0"
+      ]
+    }
+  },
+
+  "setup_instructions": {
+    "step_1": {
+      "title": "Environment Setup",
+      "commands": [
+        "# Navigate to project directory",
+        "cd f:\\internship protal\\h2s-project",
+        "",
+        "# Verify Python and Node.js are installed",
+        "python --version  # Should be 3.8+",
+        "node --version    # Should be 16+"
+      ]
+    },
+    
+    "step_2": {
+      "title": "Backend Setup (Emotion Detection API)",
+      "commands": [
+        "# Navigate to backend directory",
+        "cd backend",
+        "",
+        "# Create virtual environment (recommended)",
+        "python -m venv emotion_env",
+        "",
+        "# Activate virtual environment",
+        "# On Windows:",
+        ".\\emotion_env\\Scripts\\activate",
+        "# On macOS/Linux:",
+        "# source emotion_env/bin/activate",
+        "",
+        "# Install Python dependencies",
+        "pip install -r requirements.txt",
+        "",
+        "# Test the setup",
+        "python test_setup.py"
+      ]
+    },
+
+    "step_3": {
+      "title": "Frontend Setup (React Application)",
+      "commands": [
+        "# Navigate to frontend directory (open new terminal)",
+        "cd f:\\internship protal\\h2s-project\\frontend",
+        "",
+        "# Install Node.js dependencies",
+        "npm install",
+        "",
+        "# Alternative if using Yarn:",
+        "# yarn install"
+      ]
+    },
+
+    "step_4": {
+      "title": "Start Backend Server",
+      "commands": [
+        "# In backend directory with virtual environment activated",
+        "cd f:\\internship protal\\h2s-project\\backend",
+        "",
+        "# Start the FastAPI server",
+        "python emotion_api.py",
+        "",
+        "# Server will start on http://localhost:8000",
+        "# API documentation available at http://localhost:8000/docs"
+      ]
+    },
+
+    "step_5": {
+      "title": "Start Frontend Application",
+      "commands": [
+        "# In a new terminal, navigate to frontend directory", 
+        "cd f:\\internship protal\\h2s-project\\frontend",
+        "",
+        "# Start the development server",
+        "npm run dev",
+        "",
+        "# Application will start on http://localhost:5173",
+        "# (or next available port)"
+      ]
+    }
+  },
+
+  "usage_guide": {
+    "emotion_detection_api": {
+      "endpoint": "POST http://localhost:8000/detect-emotion",
+      "request_format": {
+        "text": "I'm feeling really excited about this new project!"
+      },
+      "response_format": {
+        "emotion": "joy",
+        "confidence": 0.95,
+        "all_scores": {
+          "joy": 0.95,
+          "sadness": 0.01,
+          "love": 0.02,
+          "anger": 0.01,
+          "fear": 0.01,
+          "surprise": 0.00
+        }
+      }
+    },
+    
+    "story_generation": {
+      "description": "Frontend automatically detects emotion from user input and provides relevant therapeutic stories",
+      "features": [
+        "Real-time emotion analysis as user types",
+        "Contextual story recommendations based on detected emotion",
+        "Therapeutic elements and follow-up questions",
+        "Responsive chat interface with emotion visualization"
+      ]
+    }
+  },
+
+  "project_structure": {
+    "backend/": {
+      "description": "Python ML backend with emotion detection",
+      "key_files": {
+        "emotion_api.py": "FastAPI server with emotion detection endpoints",
+        "train.py": "Model training script with BERT/DistilBERT",
+        "best_model.pth": "Pre-trained emotion classification model",
+        "test_setup.py": "Environment validation script",
+        "requirements.txt": "Python dependencies"
+      }
+    },
+    
+    "frontend/": {
+      "description": "React application with emotion-aware interface",
+      "key_files": {
+        "src/components/EmotionAwareChatInterface.tsx": "Main chat interface with emotion detection",
+        "src/lib/emotionStoryMapping.ts": "Story templates for each emotion",
+        "src/lib/emotionApiService.ts": "API communication service",
+        "package.json": "Node.js dependencies and scripts"
+      }
+    },
+    
+    "dataset/": {
+      "description": "Therapeutic story database",
+      "files": {
+        "emotions_stories_part1.json": "Joy and Sadness stories (12 total)",
+        "emotions_stories_part2.json": "Love and Anger stories (12 total)", 
+        "emotions_stories_part3.json": "Fear and Surprise stories (12 total)"
+      }
+    }
+  },
+
+  "testing_endpoints": {
+    "test_emotion_detection": {
+      "description": "Test the emotion detection API",
+      "curl_command": "curl -X POST http://localhost:8000/detect-emotion -H \"Content-Type: application/json\" -d \"{\\\"text\\\": \\\"I am so happy today!\\\"}\""
+    },
+    
+    "test_health_check": {
+      "description": "Verify backend is running",
+      "curl_command": "curl http://localhost:8000/health"
+    }
+  },
+
+  "troubleshooting": {
+    "common_issues": {
+      "backend_port_error": {
+        "problem": "Port 8000 already in use",
+        "solution": "Change port in emotion_api.py or kill existing process"
+      },
+      
+      "model_loading_error": {
+        "problem": "best_model.pth not found",
+        "solution": "Run train.py to generate the model or check file path"
+      },
+      
+      "dependency_conflicts": {
+        "problem": "Package version conflicts",
+        "solution": "Use virtual environment and install exact versions from requirements.txt"
+      },
+      
+      "frontend_connection_error": {
+        "problem": "Cannot connect to backend API",
+        "solution": "Ensure backend server is running on localhost:8000 and check CORS settings"
+      }
+    }
+  },
+
+  "development_notes": {
+    "model_training": "The emotion classification model uses DistilBERT fine-tuned on emotion datasets. Retrain by running train.py with your data.",
+    "story_customization": "Add new therapeutic stories by editing the JSON files in dataset/ directory following the existing structure.",
+    "emotion_expansion": "To support additional emotions, update both the ML model training data and the story mapping templates.",
+    "performance_optimization": "For production, consider model quantization, caching strategies, and CDN deployment for frontend assets."
+  },
+
+  "next_steps": {
+    "immediate": [
+      "Test both frontend and backend are running correctly",
+      "Try different text inputs to see emotion detection in action",
+      "Explore the therapeutic stories generated for each emotion"
+    ],
+    
+    "enhancement_ideas": [
+      "Add user progress tracking and story history",
+      "Implement emotion trend analysis over time", 
+      "Create personalized story recommendations based on user patterns",
+      "Add voice input for accessibility",
+      "Integrate with mental health professional dashboard"
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Wellness Companion Design System - Calming, therapeutic color palette */
+
+@layer base {
+  :root {
+    /* Peaceful sky and water inspired backgrounds */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 27%;
+
+    /* Soft card backgrounds */
+    --card: 210 40% 98%;
+    --card-foreground: 215 25% 27%;
+
+    --popover: 210 40% 98%;
+    --popover-foreground: 215 25% 27%;
+
+    /* Calming teal primary */
+    --primary: 180 45% 42%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 180 55% 65%;
+
+    /* Soft lavender secondary */
+    --secondary: 250 25% 85%;
+    --secondary-foreground: 215 25% 27%;
+
+    /* Gentle muted tones */
+    --muted: 210 30% 92%;
+    --muted-foreground: 215 15% 55%;
+
+    /* Warm sage accent */
+    --accent: 140 25% 75%;
+    --accent-foreground: 215 25% 27%;
+
+    /* Gentle warning tones */
+    --destructive: 0 65% 65%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Soft borders */
+    --border: 210 25% 88%;
+    --input: 210 25% 90%;
+    --ring: 180 45% 42%;
+
+    --radius: 0.75rem;
+
+    /* Wellness-specific design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(180 45% 42%), hsl(180 55% 65%));
+    --gradient-secondary: linear-gradient(135deg, hsl(210 20% 98%), hsl(250 25% 85%));
+    --gradient-hero: linear-gradient(135deg, hsl(180 45% 42%) 0%, hsl(200 50% 60%) 50%, hsl(250 40% 70%) 100%);
+    
+    --shadow-soft: 0 4px 20px -4px hsl(180 45% 42% / 0.15);
+    --shadow-warm: 0 8px 32px -8px hsl(180 45% 42% / 0.2);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-gentle: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode with soothing night-time wellness theme */
+    --background: 215 25% 8%;
+    --foreground: 210 40% 95%;
+
+    --card: 215 25% 10%;
+    --card-foreground: 210 40% 95%;
+
+    --popover: 215 25% 10%;
+    --popover-foreground: 210 40% 95%;
+
+    --primary: 180 55% 65%;
+    --primary-foreground: 215 25% 8%;
+    --primary-glow: 180 65% 75%;
+
+    --secondary: 250 20% 20%;
+    --secondary-foreground: 210 40% 95%;
+
+    --muted: 215 20% 15%;
+    --muted-foreground: 215 15% 65%;
+
+    --accent: 140 30% 35%;
+    --accent-foreground: 210 40% 95%;
+
+    --destructive: 0 65% 65%;
+    --destructive-foreground: 210 40% 95%;
+
+    --border: 215 20% 20%;
+    --input: 215 20% 18%;
+    --ring: 180 55% 65%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(180 55% 65%), hsl(180 65% 75%));
+    --gradient-secondary: linear-gradient(135deg, hsl(215 25% 8%), hsl(250 20% 20%));
+    --gradient-hero: linear-gradient(135deg, hsl(180 55% 35%) 0%, hsl(200 50% 40%) 50%, hsl(250 40% 50%) 100%);
+    
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+    --shadow-warm: 0 8px 32px -8px hsl(0 0% 0% / 0.4);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Smooth scroll behavior for chat */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar for chat */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}

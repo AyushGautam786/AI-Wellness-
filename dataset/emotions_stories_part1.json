@@ -1,0 +1,168 @@
+{
+  "dataset_info": {
+    "name": "Emotion-Based Therapeutic Stories Dataset",
+    "version": "1.0",
+    "description": "A curated collection of therapeutic stories mapped to six core emotions for mental wellness support",
+    "emotions": ["joy", "sadness", "love", "anger", "fear", "surprise"],
+    "total_stories": 36,
+    "stories_per_emotion": 6,
+    "created_date": "2025-09-20",
+    "therapeutic_approach": "Narrative therapy combined with cognitive behavioral techniques"
+  },
+  "joy": {
+    "emotion_description": "Positive emotional state characterized by happiness, contentment, and satisfaction",
+    "therapeutic_goal": "Amplify positive emotions, practice gratitude, build resilience",
+    "stories": [
+      {
+        "id": "joy_001",
+        "title": "The Mountain's Gift",
+        "content": "Sarah had been training for months to climb Mount Resilience. Each day brought small victories - a longer hike, stronger legs, more confident steps. When she finally reached the summit, the view wasn't just of valleys and clouds, but of her own journey. She realized that the mountain hadn't given her strength; it had revealed the strength that was always within her. Sometimes our greatest achievements aren't about reaching the top, but about discovering who we become along the way.",
+        "moral": "True joy comes from recognizing our own growth and inner strength",
+        "therapeutic_elements": ["self-efficacy", "personal growth", "achievement recognition"],
+        "follow_up_questions": [
+          "What personal 'mountains' have you climbed recently?",
+          "How do you celebrate your small daily victories?",
+          "What strengths have you discovered in yourself through challenges?"
+        ]
+      },
+      {
+        "id": "joy_002", 
+        "title": "The Painter's Colors",
+        "content": "Marcus had been painting with only gray for months, creating beautiful but somber works. One morning, he accidentally knocked over his water jar, and as he rushed to clean it, his hand brushed against a forgotten palette of vibrant colors. Without thinking, he dipped his brush in yellow and added a single stroke to his gray canvas. That stroke became a sun, then rays of light, then an entire field of sunflowers. He learned that sometimes joy isn't about starting over - it's about adding color to what already exists.",
+        "moral": "Joy can transform our existing circumstances rather than replacing them",
+        "therapeutic_elements": ["hope", "transformation", "creative expression"],
+        "follow_up_questions": [
+          "What 'colors' could you add to your current situation?",
+          "How might small changes create big transformations in your life?",
+          "When have you found beauty in unexpected places?"
+        ]
+      },
+      {
+        "id": "joy_003",
+        "title": "The Garden of Friendship",
+        "content": "Elena felt lonely after moving to a new city. She decided to plant a small garden on her balcony - just for herself. But soon, neighbors began stopping to admire her flowers. Mrs. Chen shared seeds from her homeland. Young Jake offered to water plants when Elena traveled. The mailman started taking a longer route just to see the daily changes. Elena's garden became the neighborhood's gathering place. She learned that when we nurture something beautiful, it naturally draws others into our lives.",
+        "moral": "Creating beauty and joy naturally attracts connection and community",
+        "therapeutic_elements": ["social connection", "nurturing", "community building"],
+        "follow_up_questions": [
+          "What beautiful thing could you create to share with others?",
+          "How has sharing joy multiplied your own happiness?",
+          "What connections have grown from unexpected places in your life?"
+        ]
+      },
+      {
+        "id": "joy_004",
+        "title": "The Dance of Seasons",
+        "content": "Ahmed loved spring but dreaded winter. Each year, the cold months felt like a pause in his happiness. Then his grandmother taught him to watch the bare trees more carefully. 'See how they rest?' she said. 'They're not dead - they're gathering strength for spring's explosion.' That winter, Ahmed began to notice the intricate patterns of frost, the way snow outlined every branch, the quiet beauty of the season. He realized that even in life's winters, there was a different kind of joy - the peace of rest, the anticipation of renewal.",
+        "moral": "Every season of life, including the difficult ones, has its own form of beauty and purpose",
+        "therapeutic_elements": ["acceptance", "finding meaning", "seasonal wisdom"],
+        "follow_up_questions": [
+          "What beauty can you find in your current 'season' of life?",
+          "How do challenging times prepare you for better ones?",
+          "What wisdom have your difficult periods taught you?"
+        ]
+      },
+      {
+        "id": "joy_005",
+        "title": "The Light Collector",
+        "content": "Maya's job was to maintain the city's street lamps. Each evening, she would check that every light was working, replacing bulbs and cleaning lenses. People rarely noticed her work until the night of the great storm when power lines fell. In the darkness, Maya lit emergency lanterns at every corner, creating a network of light that guided people safely home. She realized that her daily, invisible work had prepared her for this moment of true service. Sometimes the greatest joy comes not from being seen, but from being the light others need.",
+        "moral": "Joy can be found in service and in being quietly essential to others' wellbeing",
+        "therapeutic_elements": ["purpose", "service", "quiet heroism"],
+        "follow_up_questions": [
+          "How do you serve as a 'light' in others' lives?",
+          "What invisible work do you do that makes a difference?",
+          "When have you found joy in helping others, even without recognition?"
+        ]
+      },
+      {
+        "id": "joy_006",
+        "title": "The Memory Keeper",
+        "content": "Robert's memory wasn't what it used to be, and this worried him greatly. His daughter suggested he write down one happy memory each day. At first, he struggled to remember, but slowly the practice awakened something. Each memory led to another - the taste of his mother's bread, the sound of his children's laughter, the feeling of his wife's hand in his. Soon, his notebook was full, and he realized something wonderful: happiness wasn't disappearing from his life; it was multiplying as he honored it with attention. The act of remembering joy created more joy.",
+        "moral": "Actively celebrating and remembering joy amplifies its presence in our lives",
+        "therapeutic_elements": ["gratitude practice", "memory work", "appreciation"],
+        "follow_up_questions": [
+          "What joyful memories deserve more attention in your life?",
+          "How does reflecting on happy times affect your current mood?",
+          "What daily practice could help you notice and remember joy?"
+        ]
+      }
+    ]
+  },
+  "sadness": {
+    "emotion_description": "Natural emotional response to loss, disappointment, or difficult life circumstances",
+    "therapeutic_goal": "Validate emotions, process grief, build coping strategies, find meaning",
+    "stories": [
+      {
+        "id": "sadness_001",
+        "title": "The Broken Vase",
+        "content": "When Grandmother's antique vase shattered, Lisa wept. It had survived wars, moves, and generations - only to break during her clumsy cleaning. Her mother found her gathering the pieces, tears streaming. 'Let me show you something,' her mother said gently. Together, they arranged the fragments into a beautiful mosaic, filling the gaps with gold paint. 'In Japan, they call this kintsugi,' her mother explained. 'The breaks become part of the beauty.' Lisa learned that being broken doesn't mean being worthless - sometimes it means becoming something entirely new and unexpectedly beautiful.",
+        "moral": "Our breaks and scars can become sources of unique beauty and strength",
+        "therapeutic_elements": ["reframing trauma", "resilience", "post-traumatic growth"],
+        "follow_up_questions": [
+          "What 'broken' parts of your life might contain hidden beauty?",
+          "How have your difficult experiences made you more compassionate or wise?",
+          "What would it mean to fill your breaks with 'gold' - with meaning and purpose?"
+        ]
+      },
+      {
+        "id": "sadness_002",
+        "title": "The Autumn Tree",
+        "content": "David sat beneath the old oak, grieving his father's death. The tree was releasing its leaves, and he watched them fall with a heavy heart. An elderly woman sat beside him. 'Sad to see them go?' she asked. David nodded. 'I used to think so too,' she said, 'until I realized the tree isn't losing its leaves - it's trusting them to the earth. Those leaves will become soil that feeds new growth. The tree knows something we often forget: letting go isn't loss, it's transformation.' David felt something shift in his chest. His father hadn't left him; he had become part of everything that would grow in David's life.",
+        "moral": "Letting go of what we love doesn't mean losing it - it can mean transforming it into something that nourishes our future",
+        "therapeutic_elements": ["grief processing", "meaning-making", "spiritual coping"],
+        "follow_up_questions": [
+          "How might your losses be 'feeding' new growth in your life?",
+          "What would it mean to trust your grief to the process of healing?",
+          "How do those you've lost continue to live within you?"
+        ]
+      },
+      {
+        "id": "sadness_003",
+        "title": "The Rain's Gift",
+        "content": "Samantha hated rainy days - they made her feel trapped and melancholy. During a particularly gray week, her neighbor's five-year-old daughter knocked on her door. 'Want to dance in the rain?' the child asked. Reluctantly, Samantha stepped outside. The little girl spun and laughed, catching raindrops on her tongue. 'The flowers need this!' she giggled. 'And the earth is getting a drink!' Watching the child's pure joy, Samantha felt her sadness shift. She realized that sometimes what feels like gloom to us is exactly what the world needs to grow. Her sadness wasn't a problem to fix - it was rain for her soul.",
+        "moral": "Difficult emotions, like rain, serve a purpose in nourishing our growth and understanding",
+        "therapeutic_elements": ["emotion acceptance", "reframing", "childlike wonder"],
+        "follow_up_questions": [
+          "How might your sadness be serving a purpose in your life?",
+          "What new growth might come from this difficult time?",
+          "When have you found unexpected gifts within challenging emotions?"
+        ]
+      },
+      {
+        "id": "sadness_004",
+        "title": "The Night Lighthouse",
+        "content": "Emma worked as a lighthouse keeper during the loneliest hours - midnight to dawn. Ships rarely passed, and the work felt endless and thankless. One stormy night, she saw a small boat struggling in the waves. Her light guided it safely to shore, and she learned it carried a young father rushing his sick child to the mainland hospital. He never knew her name, never saw her face, but her faithful presence in the darkness had saved two lives. Emma realized that some of our most important work happens in darkness and solitude, seen only by those who desperately need our light.",
+        "moral": "Our presence and persistence during dark times can be life-saving for others, even when we feel unseen",
+        "therapeutic_elements": ["purpose in suffering", "meaning-making", "service"],
+        "follow_up_questions": [
+          "How might your struggles be preparing you to help others?",
+          "What light do you carry that others might need?",
+          "When have you been someone's 'lighthouse' without realizing it?"
+        ]
+      },
+      {
+        "id": "sadness_005",
+        "title": "The Phoenix Feather",
+        "content": "After losing her job, her home, and her confidence, Maria felt like everything she had built was ash. Walking through the park, she found a single feather - iridescent, beautiful, seemingly untouched by the world's harshness. She picked it up and noticed tiny imperfections: small tears, missing barbs, signs of a difficult journey. Yet it was still beautiful, still capable of flight. She tucked it in her journal as a reminder. Later, she learned it came from a phoenix sculpture - a bird that rises from ashes. The feather's beauty came not despite its wear, but because of the journey it represented.",
+        "moral": "Our beauty and strength often come not despite our struggles, but because of how we've journeyed through them",
+        "therapeutic_elements": ["resilience", "self-compassion", "symbolic healing"],
+        "follow_up_questions": [
+          "What signs of resilience can you see in your own life story?",
+          "How have your struggles contributed to your unique strength or wisdom?",
+          "What would it mean to honor your journey, including its difficult parts?"
+        ]
+      },
+      {
+        "id": "sadness_006",
+        "title": "The Healing Garden",
+        "content": "After her sister's death, Grace couldn't bear to tend their shared garden. Months passed, and weeds took over. When she finally ventured out, expecting only decay, she found something unexpected: wildflowers had seeded themselves among the weeds, and her sister's favorite roses were blooming despite neglect. The garden wasn't dead - it was transforming. Grace realized that healing doesn't mean returning to how things were; it means allowing something new to grow from what remains. She began tending the garden again, but this time she let the wildflowers stay alongside the roses.",
+        "moral": "Healing doesn't mean erasing our pain or returning to how things were - it means growing something new alongside what has been lost",
+        "therapeutic_elements": ["grief integration", "continuing bonds", "adaptive healing"],
+        "follow_up_questions": [
+          "What unexpected growth have you noticed in your life after loss?",
+          "How can you honor both your grief and your healing?",
+          "What new understanding or strength has emerged from your difficult experiences?"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env
+
+# PyTorch models (too large for GitHub)
+*.pth
+*.pt
+best_model.pth
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Gradio temporary files
+.gradio/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Training outputs
+training_curves.png
+*.log
+
+# Temporary files
+*.tmp
+*.temp

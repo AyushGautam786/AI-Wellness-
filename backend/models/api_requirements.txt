@@ -1,0 +1,12 @@
+# API service requirements
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# Existing ML requirements (from requirements.txt)
+torch>=1.9.0
+transformers>=4.20.0
+datasets>=2.0.0
+scikit-learn>=1.0.0
+numpy>=1.21.0
+pandas>=1.3.0
