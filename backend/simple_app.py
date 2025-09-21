@@ -22,7 +22,14 @@ app = FastAPI(
 # --- CORS Configuration ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "*",  # Allow all for now
+        "https://localhost:3000",
+        "https://localhost:8080", 
+        "https://localhost:4173",
+        "https://*.vercel.app",
+        "https://ai-wellness-app.vercel.app",  # Replace with your actual Vercel URL
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
