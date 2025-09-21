@@ -3,29 +3,17 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+# Copy requirements first for better caching
+COPY models/api_requirements.txt .
 
-# Copy requirements and install Python dependencies
-COPY models/api_requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN pip install --no-cache-dir -r api_requirements.txt
 
-# Copy application code
-COPY models/ ./models/
-COPY emotion_env/ ./emotion_env/
-
-# Create non-root user for security
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-USER appuser
+# Copy the application code
+COPY models/ .
 
 # Expose port
 EXPOSE 8000
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
-
-# Start the application
-CMD ["python", "models/mock_emotion_api.py"]
+# Command to run the application
+CMD ["python", "mock_emotion_api.py"]

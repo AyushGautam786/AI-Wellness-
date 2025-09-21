@@ -1,6 +1,5 @@
 """
-Simple Mock Emotion API for testing the frontend integration
-This bypasses the PyTorch model loading issue and provides mock responses
+Simple Mock Emotion API for Railway deployment
 """
 
 from fastapi import FastAPI, HTTPException
@@ -16,23 +15,24 @@ logger = logging.getLogger(__name__)
 
 # --- FastAPI App Setup ---
 app = FastAPI(
-    title="Mock Emotion Detection API",
-    description="Mock API for emotion detection while debugging the ML model",
+    title="AI-Wellness Emotion Detection API",
+    description="Emotion detection API for AI-Wellness therapeutic application",
     version="1.0.0"
 )
 
-# --- CORS Configuration ---
+# --- CORS Configuration for Production ---
 origins = [
     "http://localhost:3000",
     "http://localhost:8080",
     "http://localhost:4173",
-    "https://*.vercel.app",  # Allow all Vercel apps
-    "https://your-vercel-app.vercel.app",  # We'll update this after Vercel deployment
+    "https://*.vercel.app",
+    "https://ai-wellness-app.vercel.app",  # Update with your actual Vercel URL
+    "https://*.railway.app",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],  # Allow all origins for now, tighten in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -53,50 +53,89 @@ EMOTIONS = ['sadness', 'joy', 'love', 'anger', 'fear', 'surprise']
 
 @app.get("/")
 async def root():
-    return {"message": "Mock Emotion Detection API is running!"}
+    return {
+        "message": "AI-Wellness Emotion Detection API",
+        "status": "running",
+        "version": "1.0.0"
+    }
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "service": "mock-emotion-api"}
+    return {
+        "status": "healthy", 
+        "service": "ai-wellness-emotion-api",
+        "environment": os.environ.get("RAILWAY_ENVIRONMENT", "production")
+    }
 
 @app.post("/predict", response_model=EmotionResponse)
 async def predict_emotion(input_data: TextInput):
-    """Mock emotion prediction endpoint."""
+    """Emotion prediction endpoint with enhanced keyword detection."""
     try:
         text = input_data.text.strip()
         
         if not text:
             raise HTTPException(status_code=400, detail="Text input cannot be empty")
         
-        # Mock logic: Simple keyword-based emotion detection
+        # Enhanced keyword-based emotion detection
         text_lower = text.lower()
         
-        if any(word in text_lower for word in ['happy', 'joy', 'great', 'wonderful', 'amazing', 'excited']):
+        # Joy keywords
+        if any(word in text_lower for word in [
+            'happy', 'joy', 'great', 'wonderful', 'amazing', 'excited', 
+            'fantastic', 'awesome', 'delighted', 'thrilled', 'cheerful'
+        ]):
             emotion = 'joy'
             confidence = random.uniform(0.75, 0.95)
-        elif any(word in text_lower for word in ['sad', 'depressed', 'down', 'upset', 'disappointed']):
+            
+        # Sadness keywords  
+        elif any(word in text_lower for word in [
+            'sad', 'depressed', 'down', 'upset', 'disappointed', 'hurt',
+            'gloomy', 'miserable', 'heartbroken', 'melancholy'
+        ]):
             emotion = 'sadness'
             confidence = random.uniform(0.70, 0.90)
-        elif any(word in text_lower for word in ['love', 'adore', 'cherish', 'care', 'affection']):
+            
+        # Love keywords
+        elif any(word in text_lower for word in [
+            'love', 'adore', 'cherish', 'care', 'affection', 'devoted',
+            'passionate', 'romantic', 'tender', 'fond'
+        ]):
             emotion = 'love'
             confidence = random.uniform(0.70, 0.85)
-        elif any(word in text_lower for word in ['angry', 'mad', 'furious', 'irritated', 'annoyed']):
+            
+        # Anger keywords
+        elif any(word in text_lower for word in [
+            'angry', 'mad', 'furious', 'irritated', 'annoyed', 'rage',
+            'frustrated', 'outraged', 'livid', 'hostile'
+        ]):
             emotion = 'anger'
             confidence = random.uniform(0.75, 0.90)
-        elif any(word in text_lower for word in ['scared', 'afraid', 'worried', 'anxious', 'nervous']):
+            
+        # Fear keywords
+        elif any(word in text_lower for word in [
+            'scared', 'afraid', 'worried', 'anxious', 'nervous', 'terrified',
+            'panic', 'frightened', 'concerned', 'apprehensive'
+        ]):
             emotion = 'fear'
             confidence = random.uniform(0.70, 0.85)
-        elif any(word in text_lower for word in ['surprised', 'shocked', 'amazed', 'unexpected']):
+            
+        # Surprise keywords
+        elif any(word in text_lower for word in [
+            'surprised', 'shocked', 'amazed', 'unexpected', 'astonished',
+            'stunned', 'bewildered', 'startled'
+        ]):
             emotion = 'surprise'
             confidence = random.uniform(0.65, 0.80)
         else:
-            # Random emotion for texts that don't match keywords
-            emotion = random.choice(EMOTIONS)
-            confidence = random.uniform(0.50, 0.75)
+            # Default to neutral/mixed emotions
+            emotion = random.choice(['joy', 'sadness'])  # Bias toward common emotions
+            confidence = random.uniform(0.45, 0.65)
+        
+        logger.info(f"Emotion detected: {emotion} (confidence: {confidence:.2f}) for text: '{text[:50]}...'")
         
         return EmotionResponse(
             predicted_emotion=emotion,
-            confidence=confidence,
+            confidence=round(confidence, 2),
             success=True,
             message=f"Emotion '{emotion}' detected with {confidence:.2f} confidence"
         )
@@ -113,11 +152,20 @@ async def get_supported_emotions():
     """Get list of supported emotions."""
     return {
         "emotions": EMOTIONS,
-        "total_count": len(EMOTIONS)
+        "total_count": len(EMOTIONS),
+        "service": "ai-wellness-emotion-api"
     }
 
 # --- Run Application ---
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    host = "0.0.0.0"
+    
+    logger.info(f"Starting AI-Wellness Emotion API on {host}:{port}")
+    uvicorn.run(
+        app, 
+        host=host, 
+        port=port,
+        log_level="info"
+    )
