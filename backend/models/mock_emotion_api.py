@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import random
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -21,9 +22,17 @@ app = FastAPI(
 )
 
 # --- CORS Configuration ---
+origins = [
+    "http://localhost:3000",
+    "http://localhost:8080",
+    "http://localhost:4173",
+    "https://*.vercel.app",  # Allow all Vercel apps
+    "https://your-vercel-app.vercel.app",  # We'll update this after Vercel deployment
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify exact origins
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -110,17 +119,5 @@ async def get_supported_emotions():
 # --- Run Application ---
 if __name__ == "__main__":
     import uvicorn
-    
-    print("🚀 Starting Mock Emotion Detection API...")
-    print("📝 API Documentation will be available at: http://127.0.0.1:8000/docs")
-    print("🔧 Interactive API testing at: http://127.0.0.1:8000/redoc")
-    print("⏹️  Press Ctrl+C to stop the server")
-    print("-" * 60)
-    
-    uvicorn.run(
-        app,
-        host="0.0.0.0",
-        port=8000,
-        log_level="info",
-        reload=False
-    )
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)

@@ -17,13 +17,16 @@ export interface ApiResponse<T> {
   status: number;
 }
 
+// Update the API base URL for production
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 class EmotionApiService {
   private baseUrl: string;
   private timeout: number;
 
-  constructor(baseUrl: string = 'http://127.0.0.1:8000', timeout: number = 10000) {
-    this.baseUrl = baseUrl;
-    this.timeout = timeout;
+  constructor() {
+    this.baseUrl = API_BASE_URL;
+    this.timeout = 10000;
   }
 
   /**
@@ -210,7 +213,7 @@ export const emotionApi = {
    */
   async predictEmotion(text: string): Promise<EmotionPrediction | null> {
     const response = await emotionApiService.predictEmotion(text);
-    if (response.error) {
+    if response.error) {
       console.error('Emotion prediction error:', response.error);
       return null;
     }
