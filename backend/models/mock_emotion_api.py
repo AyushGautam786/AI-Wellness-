@@ -26,13 +26,13 @@ origins = [
     "http://localhost:8080",
     "http://localhost:4173",
     "https://*.vercel.app",
-    "https://ai-wellness-app.vercel.app",  # Update with your actual Vercel URL
+    "https://ai-wellness-app.vercel.app",
     "https://*.railway.app",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for now, tighten in production
+    allow_origins=["*"],  # Allow all origins for development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -128,7 +128,7 @@ async def predict_emotion(input_data: TextInput):
             confidence = random.uniform(0.65, 0.80)
         else:
             # Default to neutral/mixed emotions
-            emotion = random.choice(['joy', 'sadness'])  # Bias toward common emotions
+            emotion = random.choice(['joy', 'sadness'])
             confidence = random.uniform(0.45, 0.65)
         
         logger.info(f"Emotion detected: {emotion} (confidence: {confidence:.2f}) for text: '{text[:50]}...'")

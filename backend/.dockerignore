@@ -1,0 +1,13 @@
+emotion_env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.git/
+.gitignore
+README.md
+.DS_Store
+*.log
+.gradio/
+models/models/
+*.pth
