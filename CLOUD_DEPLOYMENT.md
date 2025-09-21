@@ -104,3 +104,38 @@ docker-compose up --build -d
 | AWS | $1-5 | $5-10 | $6-15 |
 
 **Recommended**: Start with Vercel + Railway (free) for testing, upgrade as needed.
+
+## nixpacks.toml for Backend
+
+```toml
+# Create nixpacks.toml file instead of Dockerfile
+[phases.setup]
+nixPkgs = ["python311"]
+
+[phases.install]
+cmds = ["pip install -r requirements.txt"]
+
+[start]
+cmd = "python models/mock_emotion_api.py"
+
+[variables]
+PORT = "8000"
+```
+
+#!/usr/bin/env python3
+"""
+Entry point for Railway deployment
+"""
+import os
+import sys
+
+# Add models directory to Python path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'models'))
+
+# Import and run the FastAPI app
+from mock_emotion_api import app
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
