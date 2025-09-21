@@ -26,7 +26,7 @@ origins = [
     "http://localhost:8080",
     "http://localhost:4173",
     "https://*.vercel.app",
-    "https://ai-wellness-app.vercel.app",
+    "https://ai-wellness-app.vercel.app",  # Replace with your actual Vercel URL
     "https://*.railway.app",
 ]
 
