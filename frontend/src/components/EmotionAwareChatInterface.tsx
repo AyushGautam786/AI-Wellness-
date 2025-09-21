@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Send, Mic, ArrowLeft, Heart, Brain, Zap } from "lucide-react";
+import { DatasetStoryService } from "@/utils/datasetStoryService";
 
 interface EmotionPrediction {
   predicted_emotion: string;
@@ -19,6 +20,7 @@ interface Message {
   timestamp: Date;
   emotion?: EmotionPrediction;
   isEmotionBased?: boolean;
+  followUpQuestions?: string[];
 }
 
 const ChatInterface = ({ onBack }: { onBack: () => void }) => {
@@ -89,44 +91,15 @@ const ChatInterface = ({ onBack }: { onBack: () => void }) => {
   };
 
   const getEmotionBasedResponse = (emotion: string, confidence: number, userMessage: string): string => {
-    const emotionResponses = {
-      joy: [
-        `I can sense the joy in your words! 🌟 Let me share a story about celebrating life's beautiful moments. There once was a person who found unexpected magic in their everyday routine - they discovered that happiness isn't just in big achievements, but in the small wonders we notice along the way. Your positive energy reminds me that joy is contagious and precious.`,
-        `Your happiness is wonderful to feel! ✨ Here's a story about someone who learned to amplify their joy: They started a gratitude journal and realized that acknowledging good moments made them multiply. Like you right now, they discovered that sharing joy makes it grow even brighter.`
-      ],
-      sadness: [
-        `I hear the sadness in your words, and I want you to know that what you're feeling is completely valid. 🌧️ Let me share a gentle story: There was once a gardener who noticed that after every rain, their garden grew more beautiful. They learned that sadness, like rain, can nourish growth - it's part of the cycle that helps us bloom. Your tears are not a sign of weakness, but of your deep capacity to feel and heal.`,
-        `Your sadness is acknowledged and held with care. 🕊️ Here's a story about resilience: A lighthouse keeper tended their light through many storms, knowing that even in the darkest nights, their beacon could guide others home. Like that keeper, your gentle heart continues to shine, even when you're hurting.`
-      ],
-      love: [
-        `The love you're expressing is beautiful and precious! 💕 Here's a story about the power of connection: Two trees grew side by side, their roots intertwining underground, supporting each other through seasons of sun and storm. Love like yours creates invisible bonds that strengthen both the giver and receiver.`,
-        `I can feel the warmth of love in your message! 🌸 Let me share a story about a person who learned that love multiplies when shared - the more they gave, the more they had. Your capacity for love is a gift to the world.`
-      ],
-      anger: [
-        `I can feel the intensity of your anger, and I want you to know that anger often signals that something important to you has been threatened. 🔥 Here's a story about transformation: A blacksmith learned that the hottest fires create the strongest steel. Your anger, when channeled thoughtfully, can become a powerful force for positive change and justice.`,
-        `Your anger is valid and carries an important message. ⚡ Let me tell you about someone who discovered that anger was their inner protector speaking up - it was guarding their values and boundaries. Understanding this helped them respond rather than react.`
-      ],
-      fear: [
-        `I recognize the fear you're experiencing, and feeling scared doesn't make you weak - it makes you human. 🌟 Here's a story about courage: A person stood at the edge of something new, heart racing with fear. But they took one small step, then another, discovering that courage isn't the absence of fear - it's feeling afraid and moving forward anyway.`,
-        `Your fear is understandable, and you don't have to face it alone. 🏮 Let me tell you about finding safety in uncertainty: A traveler lost in fog discovered that even when they couldn't see the whole path, they could still see the next step. Each small step forward built their confidence.`
-      ],
-      surprise: [
-        `I can sense your surprise! Life has a way of catching us off guard, doesn't it? ✨ Here's a story about embracing the unexpected: A dancer was performing when the music suddenly changed, but instead of stopping, they began to improvise, creating something more beautiful than they had ever planned. Sometimes surprises lead to our greatest discoveries.`,
-        `What an interesting surprise! 🎭 Let me share a story about adaptability: A gardener planted seeds expecting roses but got wildflowers instead. At first disappointed, they soon realized the wildflowers were exactly what their garden needed - sometimes life knows what we need before we do.`
-      ]
-    };
-
-    const responses = emotionResponses[emotion as keyof typeof emotionResponses] || [
-      `I can sense you're feeling ${emotion}. Thank you for sharing with me. Every emotion carries wisdom and purpose. Let me sit with you in this feeling and offer you support.`
-    ];
-
-    const selectedResponse = responses[Math.floor(Math.random() * responses.length)];
+    // Use the DatasetStoryService to generate a proper therapeutic story response
+    const storyResponse = DatasetStoryService.generateTherapeuticResponse(emotion, confidence, userMessage);
     
+    // Add confidence indicator if high confidence
     if (confidence > 0.7) {
-      return `(Emotion detected: ${emotion} - ${Math.round(confidence * 100)}% confidence)\n\n${selectedResponse}`;
-    } else {
-      return selectedResponse;
+      return `(Emotion detected: ${emotion} - ${Math.round(confidence * 100)}% confidence)\n\n${storyResponse}`;
     }
+    
+    return storyResponse;
   };
 
   const getFallbackResponse = (userMessage: string): string => {
@@ -166,9 +139,11 @@ const ChatInterface = ({ onBack }: { onBack: () => void }) => {
     setTimeout(() => {
       let responseText: string;
       let isEmotionBased = false;
+      let followUpQuestions: string[] = [];
 
       if (emotion && emotion.success) {
         responseText = getEmotionBasedResponse(emotion.predicted_emotion, emotion.confidence, inputValue);
+        followUpQuestions = DatasetStoryService.getFollowUpQuestions(emotion.predicted_emotion);
         isEmotionBased = true;
       } else {
         responseText = getFallbackResponse(inputValue);
@@ -180,7 +155,8 @@ const ChatInterface = ({ onBack }: { onBack: () => void }) => {
         isUser: false,
         timestamp: new Date(),
         emotion: emotion || undefined,
-        isEmotionBased
+        isEmotionBased,
+        followUpQuestions
       };
       
       setMessages(prev => [...prev, aiResponse]);
@@ -279,6 +255,21 @@ const ChatInterface = ({ onBack }: { onBack: () => void }) => {
                   : "bg-card border-border"
               }`}>
                 <p className="leading-relaxed whitespace-pre-wrap">{message.text}</p>
+                
+                {/* Follow-up questions for therapeutic stories */}
+                {!message.isUser && message.followUpQuestions && message.followUpQuestions.length > 0 && (
+                  <div className="mt-4 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/30">
+                    <p className="text-sm font-medium text-muted-foreground mb-2">💭 Reflection Questions:</p>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
+                      {message.followUpQuestions.map((question, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <span className="text-primary mt-1">•</span>
+                          <span>{question}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 
                 {/* Emotion indicator for AI responses */}
                 {!message.isUser && message.emotion && message.emotion.success && (

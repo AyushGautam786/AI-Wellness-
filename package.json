@@ -1,0 +1,37 @@
+{
+  "name": "ai-wellness-deployment",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy:vercel": "cd frontend && vercel --prod",
+    "deploy:netlify": "cd frontend && npm run build && netlify deploy --prod --dir=dist",
+    "build:all": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build:backend": "cd backend && pip install -r requirements.txt",
+    "start:production": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd backend && python models/mock_emotion_api.py",
+    "start:frontend": "cd frontend && npm run preview",
+    "test:api": "curl http://localhost:8000/health",
+    "test:integration": "curl -X POST http://localhost:8000/predict -H \"Content-Type: application/json\" -d \"{\\\"text\\\": \\\"I am feeling happy today\\\"}\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/ai-wellness.git"
+  },
+  "keywords": [
+    "ai",
+    "wellness",
+    "emotion-detection",
+    "therapeutic-stories",
+    "mental-health"
+  ],
+  "description": "AI-powered wellness application with emotion detection and therapeutic story generation"
+}
